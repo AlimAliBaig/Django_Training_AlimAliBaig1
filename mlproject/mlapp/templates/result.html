@@ -1,0 +1,913 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Result | Neural Output</title>
+
+    <style>
+        /* =========================================================
+           FUTURISTIC RESULT PAGE
+           ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(circle at 15% 20%, rgba(0, 255, 255, 0.12), transparent 25%),
+                radial-gradient(circle at 85% 15%, rgba(138, 43, 226, 0.15), transparent 25%),
+                radial-gradient(circle at 50% 90%, rgba(0, 128, 255, 0.12), transparent 30%),
+                #030712;
+        }
+
+        /* =========================================================
+           ANIMATED GRID
+           ========================================================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -5;
+
+            background-image:
+                linear-gradient(rgba(0,255,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,255,0.035) 1px, transparent 1px);
+
+            background-size: 55px 55px;
+
+            animation: gridMove 18s linear infinite;
+        }
+
+        @keyframes gridMove {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(55px);
+            }
+        }
+
+        /* =========================================================
+           AURORA LIGHTS
+           ========================================================= */
+
+        .aurora {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: -3;
+        }
+
+        .aurora.one {
+            background: #00ffff;
+            top: -180px;
+            left: -150px;
+            animation: floatOne 10s ease-in-out infinite alternate;
+        }
+
+        .aurora.two {
+            background: #8b5cf6;
+            right: -180px;
+            top: 20%;
+            animation: floatTwo 13s ease-in-out infinite alternate;
+        }
+
+        .aurora.three {
+            background: #008cff;
+            bottom: -250px;
+            left: 35%;
+            animation: floatThree 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatOne {
+            to {
+                transform: translate(180px, 160px) scale(1.2);
+            }
+        }
+
+        @keyframes floatTwo {
+            to {
+                transform: translate(-160px, 100px) scale(1.3);
+            }
+        }
+
+        @keyframes floatThree {
+            to {
+                transform: translate(100px, -120px) scale(1.25);
+            }
+        }
+
+        /* =========================================================
+           PARTICLES
+           ========================================================= */
+
+        .particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #00ffff;
+
+            animation: particleFloat linear infinite;
+        }
+
+        .particle:nth-child(1) {
+            left: 8%;
+            top: 80%;
+            animation-duration: 9s;
+        }
+
+        .particle:nth-child(2) {
+            left: 20%;
+            top: 30%;
+            animation-duration: 13s;
+        }
+
+        .particle:nth-child(3) {
+            left: 35%;
+            top: 70%;
+            animation-duration: 11s;
+        }
+
+        .particle:nth-child(4) {
+            left: 48%;
+            top: 20%;
+            animation-duration: 8s;
+        }
+
+        .particle:nth-child(5) {
+            left: 60%;
+            top: 80%;
+            animation-duration: 14s;
+        }
+
+        .particle:nth-child(6) {
+            left: 75%;
+            top: 40%;
+            animation-duration: 10s;
+        }
+
+        .particle:nth-child(7) {
+            left: 90%;
+            top: 70%;
+            animation-duration: 12s;
+        }
+
+        .particle:nth-child(8) {
+            left: 55%;
+            top: 50%;
+            animation-duration: 15s;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* =========================================================
+           MAIN CONTAINER
+           ========================================================= */
+
+        .page {
+            width: min(1100px, 92%);
+            margin: auto;
+            padding: 70px 0;
+        }
+
+        /* =========================================================
+           TOP HEADER
+           ========================================================= */
+
+        .header {
+            text-align: center;
+            margin-bottom: 55px;
+
+            animation: entrance 1.2s cubic-bezier(.2,.8,.2,1);
+        }
+
+        .system-label {
+            display: inline-block;
+            padding: 8px 18px;
+            border: 1px solid rgba(0,255,255,.35);
+            border-radius: 50px;
+
+            color: #00ffff;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+
+            background: rgba(0,255,255,.05);
+            box-shadow:
+                0 0 20px rgba(0,255,255,.1),
+                inset 0 0 20px rgba(0,255,255,.04);
+
+            animation: labelPulse 2s infinite;
+        }
+
+        @keyframes labelPulse {
+            50% {
+                box-shadow:
+                    0 0 35px rgba(0,255,255,.25),
+                    inset 0 0 25px rgba(0,255,255,.08);
+            }
+        }
+
+        .header h1 {
+            margin-top: 20px;
+            font-size: clamp(42px, 7vw, 78px);
+            font-weight: 800;
+            letter-spacing: -3px;
+
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #00ffff,
+                #9b5cff,
+                #ffffff
+            );
+
+            background-size: 300%;
+            -webkit-background-clip: text;
+            color: transparent;
+
+            animation: gradientText 5s linear infinite;
+        }
+
+        @keyframes gradientText {
+            to {
+                background-position: 300%;
+            }
+        }
+
+        .header p {
+            margin-top: 12px;
+            color: #94a3b8;
+            font-size: 16px;
+        }
+
+        /* =========================================================
+           RESULT GRID
+           ========================================================= */
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        /* =========================================================
+           GLASS CARD
+           ========================================================= */
+
+        .glass {
+            position: relative;
+            padding: 32px;
+
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.10),
+                    rgba(255,255,255,.025)
+                );
+
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,.35),
+                inset 0 1px rgba(255,255,255,.12);
+
+            overflow: hidden;
+
+            transition:
+                transform .5s cubic-bezier(.2,.8,.2,1),
+                border .5s,
+                box-shadow .5s;
+        }
+
+        /* Moving shine */
+
+        .glass::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 400px;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,.08),
+                transparent
+            );
+
+            transform: rotate(25deg);
+            left: -250px;
+            top: -100px;
+
+            transition: left .8s;
+        }
+
+        .glass:hover::before {
+            left: 120%;
+        }
+
+        .glass:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0,255,255,.35);
+
+            box-shadow:
+                0 35px 90px rgba(0,0,0,.5),
+                0 0 35px rgba(0,255,255,.08);
+        }
+
+        .card-title {
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-bottom: 18px;
+        }
+
+        /* =========================================================
+           INPUT VALUE
+           ========================================================= */
+
+        .input-value {
+            font-size: clamp(25px, 4vw, 42px);
+            font-weight: 700;
+            word-break: break-word;
+
+            color: #ffffff;
+
+            text-shadow:
+                0 0 20px rgba(255,255,255,.15);
+        }
+
+        .input-value::after {
+            content: "";
+            display: inline-block;
+            width: 7px;
+            height: 30px;
+            margin-left: 8px;
+
+            background: #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+
+            animation: cursorBlink 1s infinite;
+        }
+
+        @keyframes cursorBlink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* =========================================================
+           RESULT CARD
+           ========================================================= */
+
+        .result-card {
+            border-color: rgba(0,255,255,.25);
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(0,255,255,.12),
+                    transparent 55%
+                ),
+                rgba(255,255,255,.045);
+        }
+
+        .result-number {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 150px;
+
+            font-size: clamp(50px, 8vw, 85px);
+            font-weight: 900;
+
+            color: #ffffff;
+
+            text-shadow:
+                0 0 10px #00ffff,
+                0 0 35px rgba(0,255,255,.7),
+                0 0 80px rgba(0,255,255,.35);
+
+            animation: resultAppear 1.5s cubic-bezier(.17,.84,.44,1);
+        }
+
+        @keyframes resultAppear {
+            0% {
+                opacity: 0;
+                transform: scale(.2) rotateX(70deg);
+                filter: blur(20px);
+            }
+
+            70% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateX(0);
+                filter: blur(0);
+            }
+        }
+
+        /* =========================================================
+           ORBIT RINGS
+           ========================================================= */
+
+        .result-orbit {
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            border: 1px solid rgba(0,255,255,.18);
+            border-radius: 50%;
+
+            animation: orbit 7s linear infinite;
+        }
+
+        .result-orbit::before {
+            content: "";
+            position: absolute;
+
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+            background: #00ffff;
+            box-shadow: 0 0 20px #00ffff;
+
+            top: -4px;
+            left: 50%;
+        }
+
+        .result-orbit:nth-child(2) {
+            width: 250px;
+            height: 110px;
+            transform: rotate(35deg);
+            animation-duration: 10s;
+        }
+
+        @keyframes orbit {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =========================================================
+           LONG CONTENT
+           ========================================================= */
+
+        .content-card {
+            margin-top: 25px;
+        }
+
+        .content-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .content-header h2 {
+            font-size: 25px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #00ffff;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+
+            background: #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+
+            animation: statusPulse 1.5s infinite;
+        }
+
+        @keyframes statusPulse {
+            50% {
+                transform: scale(1.7);
+                opacity: .4;
+            }
+        }
+
+        .content-text {
+            color: #94a3b8;
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .content-text::first-letter {
+            font-size: 60px;
+            float: left;
+            line-height: .8;
+            margin-right: 10px;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+        }
+
+        /* =========================================================
+           PROGRESS LINE
+           ========================================================= */
+
+        .scan-line {
+            height: 2px;
+            width: 100%;
+            margin-top: 30px;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #00ffff,
+                #9b5cff,
+                transparent
+            );
+
+            background-size: 200%;
+
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            from {
+                background-position: 200%;
+            }
+
+            to {
+                background-position: -200%;
+            }
+        }
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+
+        .footer {
+            text-align: center;
+            margin-top: 45px;
+            color: #475569;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* =========================================================
+           ENTRANCE ANIMATION
+           ========================================================= */
+
+        @keyframes entrance {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+                filter: blur(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .reveal {
+            animation: entrance 1s both;
+        }
+
+        .delay-1 {
+            animation-delay: .2s;
+        }
+
+        .delay-2 {
+            animation-delay: .4s;
+        }
+
+        .delay-3 {
+            animation-delay: .6s;
+        }
+
+        /* =========================================================
+           MOBILE
+           ========================================================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+                padding: 40px 0;
+            }
+
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .glass {
+                padding: 25px;
+            }
+
+            .header h1 {
+                letter-spacing: -2px;
+            }
+
+            .result-orbit {
+                width: 150px;
+                height: 150px;
+            }
+
+            .content-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Aurora -->
+    <div class="aurora one"></div>
+    <div class="aurora two"></div>
+    <div class="aurora three"></div>
+
+    <!-- Floating particles -->
+    <div class="particles">
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+    </div>
+
+
+    <main class="page">
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <span class="system-label">
+                Neural Output System
+            </span>
+
+            <h1>RESULT</h1>
+
+            <p>
+                Computation completed successfully
+            </p>
+
+        </header>
+
+
+        <!-- INPUT + RESULT -->
+
+        <section class="result-grid">
+
+            <!-- USER INPUT -->
+
+            <div class="glass reveal delay-1">
+
+                <div class="card-title">
+                    User Input
+                </div>
+
+                <div class="input-value">
+                    {{list}}
+                </div>
+
+                <div class="scan-line"></div>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div class="glass result-card reveal delay-2">
+
+                <div class="card-title">
+                    Calculated Result
+                </div>
+
+                <div style="
+                    position:relative;
+                    min-height:180px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                ">
+
+                    <div class="result-orbit"></div>
+                    <div class="result-orbit"></div>
+
+                    <div class="result-number">
+                        {{ans}}
+                    </div>
+
+                </div>
+
+                <div class="scan-line"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DESCRIPTION -->
+
+        <section class="glass content-card reveal delay-3">
+
+            <div class="content-header">
+
+                <h2>
+                    Result Analysis
+                </h2>
+
+                <div class="status">
+                    <span class="status-dot"></span>
+                    System Online
+                </div>
+
+            </div>
+
+            <p class="content-text">
+
+                Type of glass: (class attribute)-- 1 building windows float_ processed -- 2 building, windows non
+float_processed --3 vehicle_wvindows_ float_ processed 4 vehicle_ wvindows_non_ float. _processed (none in this database) -- 5 containers - 6 tableware --7 headlamps
+
+            </p>
+
+            <div class="scan-line"></div>
+
+        </section>
+
+
+        <footer class="footer">
+            DJANGO • COMPUTATION ENGINE • OUTPUT VERIFIED
+        </footer>
+
+    </main>
+
+
+    <script>
+
+        /* =========================================================
+           3D CARD TILT
+           ========================================================= */
+
+        const cards = document.querySelectorAll(".glass");
+
+        cards.forEach(card => {
+
+            card.addEventListener("mousemove", event => {
+
+                const rect = card.getBoundingClientRect();
+
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX =
+                    ((y - centerY) / centerY) * -3;
+
+                const rotateY =
+                    ((x - centerX) / centerX) * 3;
+
+                card.style.transform =
+                    `perspective(900px)
+                     rotateX(${rotateX}deg)
+                     rotateY(${rotateY}deg)
+                     translateY(-8px)`;
+            });
+
+
+            card.addEventListener("mouseleave", () => {
+
+                card.style.transform =
+                    "perspective(900px) rotateX(0) rotateY(0) translateY(0)";
+
+            });
+
+        });
+
+
+        /* =========================================================
+           MOUSE GLOW
+           ========================================================= */
+
+        document.addEventListener("mousemove", event => {
+
+            document.body.style.background = `
+                radial-gradient(
+                    circle at ${event.clientX}px ${event.clientY}px,
+                    rgba(0,255,255,.06),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(0,255,255,.12),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(138,43,226,.15),
+                    transparent 25%
+                ),
+                #030712
+            `;
+
+        });
+
+
+        /* =========================================================
+           RESULT NUMBER FLASH
+           ========================================================= */
+
+        const result = document.querySelector(".result-number");
+
+        if (result) {
+
+            setTimeout(() => {
+
+                result.style.textShadow = `
+                    0 0 10px #00ffff,
+                    0 0 30px #00ffff,
+                    0 0 70px #00ffff,
+                    0 0 120px rgba(0,255,255,.8)
+                `;
+
+            }, 1200);
+
+        }
+
+    </script>
+
+</body>
+</html>
+```

@@ -1,0 +1,56 @@
+{% extends "quiz/base.html" %}
+
+{% block title %}Report Card | QuizMaster{% endblock %}
+
+{% block content %}
+<div class="result-page">
+    <div class="result-hero">
+        <span class="badge">QUIZ COMPLETED</span>
+        <h1>Your Report Card</h1>
+        <p>{{ result.user.get_full_name|default:result.user.username }} • {{ quiz.title }}</p>
+
+        <div class="result-score">{{ result.percentage }}%</div>
+        <div class="grade-pill">Grade {{ result.grade }}</div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat"><span>Total</span><strong>{{ result.total_questions }}</strong></div>
+        <div class="stat"><span>Attempted</span><strong>{{ result.attempted }}</strong></div>
+        <div class="stat good"><span>Correct</span><strong>{{ result.correct_answers }}</strong></div>
+        <div class="stat bad"><span>Wrong</span><strong>{{ result.wrong_answers }}</strong></div>
+        <div class="stat"><span>Score</span><strong>{{ result.score }}</strong></div>
+    </div>
+
+    <h2 class="analysis-title">Question-wise Analysis</h2>
+
+    {% for item in question_results %}
+    <div class="analysis-card {% if item.is_correct %}analysis-correct{% else %}analysis-wrong{% endif %}">
+        <div>
+            <span class="question-number">QUESTION {{ forloop.counter }}</span>
+            <h3>{{ item.question.question_text }}</h3>
+
+            {% if item.selected_option %}
+                <p><strong>Your Answer:</strong> {{ item.selected_option.option_text }}</p>
+            {% else %}
+                <p><strong>Your Answer:</strong> Not Attempted</p>
+            {% endif %}
+
+            {% if item.correct_option %}
+                <p><strong>Correct Answer:</strong> {{ item.correct_option.option_text }}</p>
+            {% endif %}
+        </div>
+
+        {% if item.is_correct %}
+            <span class="result-status correct">Correct ✓</span>
+        {% else %}
+            <span class="result-status wrong">Wrong ✕</span>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="result-actions">
+        <a href="{% url 'home' %}" class="big-btn ghost">← Back to Quizzes</a>
+        <button onclick="window.print()" class="big-btn primary">Print Report</button>
+    </div>
+</div>
+{% endblock %}

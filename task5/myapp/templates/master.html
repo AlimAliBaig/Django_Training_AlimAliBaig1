@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Charles</title>
+
+    <link rel="stylesheet"
+          href="{% static 'mycss.css' %}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         ROW 1 - WEBSITE NAME
+    ========================== -->
+
+    <div class="header">
+
+        <h1>www.charles.com</h1>
+
+    </div>
+
+
+
+    <!-- =========================
+         ROW 2 - BUTTONS
+    ========================== -->
+
+    <div class="navbar">
+
+        <a href="{% url 'home' %}">
+            <button>Home</button>
+        </a>
+
+        <a href="{% url 'about' %}">
+            <button>About</button>
+        </a>
+
+        <a href="{% url 'info' %}">
+            <button>Info</button>
+        </a>
+
+    </div>
+
+
+
+    <!-- =========================
+         ROW 3 - PAGE CONTENT
+    ========================== -->
+
+    <div class="content">
+
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+
+
+
+    <!-- =========================
+         ROW 4 - COPYRIGHT
+    ========================== -->
+
+    <div class="footer">
+
+        <p>@copyright Alim Ali Baig</p>
+
+    </div>
+
+
+</body>
+
+</html>

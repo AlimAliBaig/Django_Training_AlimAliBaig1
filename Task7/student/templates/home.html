@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Students</title>
+</head>
+<body style="background-color: aqua;">
+    <div style="border: 7px solid black;">
+        <h1>Registered Students</h1>
+    </div>
+
+    <div>
+        Welcome, {{ user.first_name|default:user.username }} |
+        <a href="{% url 'logout' %}">logout</a>
+    </div>
+    <br>
+
+    <div>Total students: {{ students|length }}</div>
+    <br>
+
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Gender</th>
+            <th>DOB</th>
+            <th>Course</th>
+            <th>Address</th>
+        </tr>
+        {% for s in students %}
+        <tr>
+            <td>{{ s.roll_no }}</td>
+            <td>{{ s.name }}</td>
+            <td>{{ s.email }}</td>
+            <td>{{ s.phone }}</td>
+            <td>{{ s.get_gender_display }}</td>
+            <td>{{ s.dob }}</td>
+            <td>{{ s.get_course_display }}</td>
+            <td>{{ s.address }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8">No students registered yet</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="{% url 'register' %}">register new student</a>
+</body>
+</html>

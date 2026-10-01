@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: brown;">
+    <div style="border: 7px solid black;">
+        <h1>this is home page</h1>
+    </div>
+    <div>
+        <h1 style="text-align: right;">{{ request.session.name }}</h1>
+        <button><a href="{% url 'logout' %}">Logout</a></button>
+    </div>
+    <div>
+        <h2>Congratulations</h2>
+    </div>
+</body>
+</html>

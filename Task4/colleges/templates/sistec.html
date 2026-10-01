@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SISTec | Sagar Institute of Science & Technology</title><link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="orb one"></div><div class="orb two"></div>
+<main class="page">
+<header class="topbar"><div class="brand">College<span>Explorer</span></div><a class="back" href="{% url 'main' %}">← Back to Home</a></header>
+<section class="hero">
+  <div class="eyebrow">SISTEC • ENGINEERING & TECHNOLOGY</div>
+  <h1>Sagar Institute of Science & Technology</h1>
+  <p>Explore the campus overview, visual presentation and useful navigation links.</p>
+  <div class="hero-line"></div>
+</section>
+<section class="info-shell">
+  <article class="info-card reveal">
+    <div class="eyebrow">ABOUT THE INSTITUTE</div>
+    <h2>Sagar Institute of Science & Technology</h2>
+    <p>Sagar Institute of Science & Technology (SISTec) is a leading engineering and technology institute located in Bhopal, Madhya Pradesh. The institute offers undergraduate and postgraduate programs in engineering, technology and management, with an emphasis on academic learning, practical skills and overall student development.</p>
+  </article>
+  <figure class="photo-card reveal">
+    <img src="{% static 'sistec.jpeg' %}" alt="Sagar Institute of Science & Technology campus">
+    <figcaption class="photo-label">📍 Bhopal, Madhya Pradesh</figcaption>
+  </figure>
+</section>
+<nav class="nav reveal" aria-label="College navigation">
+  <a href="{% url 'main' %}">⌂ Home</a>
+  <a class="active" href="{% url 'sistec' %}">🎓 SISTec</a>
+  <a class="" href="{% url 'lnct' %}">🏫 LNCT</a>
+  <a class="" href="{% url 'oist' %}">🏛️ OIST</a>
+</nav>
+<section class="links reveal"><h3>🔗 Useful Links</h3><div class="links-list">
+<a href="https://www.sistec.ac.in/" target="_blank" rel="noopener">🌐 Official Website</a>
+<a href="SISTec+Bhopal" target="_blank" rel="noopener">📍 View Location</a>
+<a href="https://www.google.com/search?q=SISTec+Bhopal" target="_blank" rel="noopener">🔎 Search Online</a>
+</div></section>
+<footer>Task 4 • Django college navigation project</footer>
+</main>
+<script src="{% static 'js/app.js' %}"></script>
+</body></html>

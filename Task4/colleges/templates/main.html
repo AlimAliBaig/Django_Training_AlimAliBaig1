@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Explorer | Task 4</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="orb one"></div><div class="orb two"></div>
+<main class="page">
+  <header class="topbar"><div class="brand">College<span>Explorer</span> <small>• Task 4</small></div><div class="eyebrow">DJANGO PROJECT</div></header>
+  <section class="hero">
+    <div class="eyebrow">EXPLORE • CONNECT • DISCOVER</div>
+    <h1>College Websites</h1>
+    <p>A polished interactive hub for exploring selected colleges in Bhopal. Choose a campus below to view its dedicated information page.</p>
+    <div class="hero-line"></div>
+  </section>
+  <section class="grid">
+    <a class="card home reveal" href="{% url 'main' %}"><div class="icon">⌂</div><h2>Home</h2><p>Return to the central college explorer dashboard.</p><div class="visit">Open <span>→</span></div></a>
+    <a class="card sistec reveal" href="{% url 'sistec' %}"><div class="icon">🎓</div><h2>SISTec</h2><p>Sagar Institute of Science & Technology, Bhopal.</p><div class="visit">Explore campus <span>→</span></div></a>
+    <a class="card lnct reveal" href="{% url 'lnct' %}"><div class="icon">🏫</div><h2>LNCT</h2><p>Lakshmi Narain College of Technology, Bhopal.</p><div class="visit">Explore campus <span>→</span></div></a>
+    <a class="card oist reveal" href="{% url 'oist' %}"><div class="icon">🏛️</div><h2>OIST</h2><p>Oriental College, Bhopal.</p><div class="visit">Explore campus <span>→</span></div></a>
+  </section>
+  <footer>Built with Django • Responsive UI • Animated CSS visualization</footer>
+</main>
+<script src="{% static 'js/app.js' %}"></script>
+</body></html>

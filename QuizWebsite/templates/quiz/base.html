@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}QuizMaster{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'quiz/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="brand" href="{% url 'home' %}">
+        <span class="brand-mark">Q</span>
+        QuizMaster
+    </a>
+
+    <div class="nav-links">
+        <a href="{% url 'home' %}">Home</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'dashboard' %}">My Results</a>
+            <span class="welcome">Hi, {{ user.first_name|default:user.username }}</span>
+            <form method="post" action="{% url 'logout' %}" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="nav-btn outline">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="nav-btn outline">Sign In</a>
+            <a href="{% url 'signup' %}" class="nav-btn primary">Sign Up</a>
+        {% endif %}
+    </div>
+</nav>
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+        <div class="message">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+<footer>
+    <p>QuizMaster • Learn, Practice & Track Your Progress</p>
+</footer>
+
+</body>
+</html>

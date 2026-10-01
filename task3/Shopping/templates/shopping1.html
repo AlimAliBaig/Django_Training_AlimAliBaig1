@@ -1,0 +1,422 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Hub</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: green;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================
+           ROW 1 - HEADING
+        ========================= */
+
+        .heading {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .heading h1 {
+            font-size: 40px;
+            color: black;
+        }
+
+
+        /* =========================
+           ROW 2 - SHOPPING IMAGES
+        ========================= */
+
+        .shopping-row {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: stretch;
+
+            gap: 30px;
+
+            margin: 20px auto;
+
+            width: 95%;
+
+            flex-wrap: wrap;
+        }
+
+
+        .shopping-card {
+
+            background-color: white;
+
+            width: 30%;
+
+            min-width: 280px;
+
+            padding: 20px;
+
+            text-align: center;
+
+            border-radius: 10px;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+
+        .shopping-card img {
+
+            width: 100%;
+
+            height: 280px;
+
+            object-fit: cover;
+
+            border-radius: 8px;
+        }
+
+
+        .shopping-card h2 {
+
+            margin-top: 15px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* BUTTON */
+
+        .btn {
+
+            display: inline-block;
+
+            padding: 12px 25px;
+
+            background-color: black;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 17px;
+
+            border-radius: 7px;
+
+            transition: 0.3s;
+        }
+
+
+        .btn:hover {
+
+            background-color: #444;
+
+            transform: scale(1.05);
+        }
+
+
+
+        /* =========================
+           ROW 3 - VIDEOS
+        ========================= */
+
+        .video-heading {
+
+            text-align: center;
+
+            margin-top: 50px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .video-heading h1 {
+
+            color: black;
+
+            font-size: 35px;
+        }
+
+
+        .video-row {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: stretch;
+
+            gap: 30px;
+
+            width: 95%;
+
+            margin: auto;
+
+            padding-bottom: 50px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .video-card {
+
+            background-color: white;
+
+            width: 30%;
+
+            min-width: 280px;
+
+            padding: 20px;
+
+            text-align: center;
+
+            border-radius: 10px;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+
+        .video-card video {
+
+            width: 100%;
+
+            height: 280px;
+
+            object-fit: cover;
+
+            border-radius: 8px;
+        }
+
+
+        .video-card h2 {
+
+            margin-bottom: 15px;
+        }
+
+
+
+        /* MOBILE */
+
+        @media(max-width: 900px) {
+
+            .shopping-card,
+            .video-card {
+
+                width: 45%;
+            }
+
+        }
+
+
+        @media(max-width: 600px) {
+
+            .shopping-card,
+            .video-card {
+
+                width: 90%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         ROW 1
+    ================================== -->
+
+    <div class="heading">
+
+        <h1>Shopping Hub</h1>
+
+    </div>
+
+
+
+    <!-- =================================
+         ROW 2
+         AMAZON - FLIPKART - MEESHO
+    ================================== -->
+
+    <div class="shopping-row">
+
+
+        <!-- AMAZON -->
+
+        <div class="shopping-card">
+
+            <img
+                src="{% static 'amazon.jpg' %}"
+                alt="Amazon">
+
+            <h2>Amazon</h2>
+
+
+            <a
+                href="https://www.amazon.in/"
+                target="_blank"
+                class="btn">
+
+                Visit Amazon
+
+            </a>
+
+        </div>
+
+
+
+        <!-- FLIPKART -->
+
+        <div class="shopping-card">
+
+            <img
+                src="{% static 'flipkart.jpg' %}"
+                alt="Flipkart">
+
+            <h2>Flipkart</h2>
+
+
+            <a
+                href="https://www.flipkart.com/"
+                target="_blank"
+                class="btn">
+
+                Visit Flipkart
+
+            </a>
+
+        </div>
+
+
+
+        <!-- MEESHO -->
+
+        <div class="shopping-card">
+
+            <img
+                src="{% static 'meesho.jpg' %}"
+                alt="Meesho">
+
+            <h2>Meesho</h2>
+
+
+            <a
+                href="https://www.meesho.com/"
+                target="_blank"
+                class="btn">
+
+                Visit Meesho
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================
+         ROW 3 HEADING
+    ================================== -->
+
+    <div class="video-heading">
+
+        <h1>Shopping Videos</h1>
+
+    </div>
+
+
+
+    <!-- =================================
+         ROW 3 VIDEOS
+    ================================== -->
+
+    <div class="video-row">
+
+
+        <!-- AMAZON VIDEO -->
+
+        <div class="video-card">
+
+            <h2>Amazon Video</h2>
+
+
+            <video controls>
+
+                <source
+                    src="{% static 'amazon.mp4' %}"
+                    type="video/mp4">
+
+                Your browser does not support video.
+
+            </video>
+
+        </div>
+
+
+
+        <!-- FLIPKART VIDEO -->
+
+        <div class="video-card">
+
+            <h2>Flipkart Video</h2>
+
+
+            <video controls>
+
+                <source
+                    src="{% static 'flipkart.mp4' %}"
+                    type="video/mp4">
+
+                Your browser does not support video.
+
+            </video>
+
+        </div>
+
+
+
+        <!-- MEESHO VIDEO -->
+
+        <div class="video-card">
+
+            <h2>Meesho Video</h2>
+
+
+            <video controls>
+
+                <source
+                    src="{% static 'meesho.mp4' %}"
+                    type="video/mp4">
+
+                Your browser does not support video.
+
+            </video>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

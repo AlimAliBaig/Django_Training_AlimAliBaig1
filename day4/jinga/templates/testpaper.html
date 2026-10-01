@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'mycss.css' %}">
+</head>
+<body>
+    <div>
+        {{que}}
+    </div>
+    <div>
+        <div><input type="radio" name="answer">{{a}}</div>
+        <div><input type="radio" name="answer">{{b}}</div>
+        <div><input type="radio" name="answer">{{c}}</div>
+        <div><input type="radio" name="answer">{{d}}</div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends 'master.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<h2 style="text-align:center; margin-bottom:20px;">
+    City Collection
+</h2>
+
+
+<div class="image-container">
+
+    <img src="{% static 'city1.jpg' %}" alt="City 1">
+
+    <img src="{% static 'city2.jpg' %}" alt="City 2">
+
+    <img src="{% static 'city3.jpg' %}" alt="City 3">
+
+    <img src="{% static 'city4.jpg' %}" alt="City 4">
+
+    <img src="{% static 'city5.jpg' %}" alt="City 5">
+
+    <img src="{% static 'city6.jpg' %}" alt="City 6">
+
+</div>
+
+{% endblock %}

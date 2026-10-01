@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+</head>
+
+<body>
+
+    <div>
+        Welcome, {{ user.first_name|default:user.username }} |
+        <a href="{% url 'logout' %}">logout</a>
+    </div>
+
+    <h1>Student Registration Form</h1>
+
+    <form action="{% url 'savestudent' %}" method="POST">
+
+        {% csrf_token %}
+
+        <div>
+            <span style="color: red;">{{ errormsg }}</span>
+        </div>
+
+        <div>
+            <label for="roll_no">Roll Number</label>
+        </div>
+        <div>
+            <input type="text" name="roll_no" id="roll_no" maxlength="20" value="{{ form.roll_no }}" required>
+        </div>
+
+        <div>
+            <label for="name">Full Name</label>
+        </div>
+        <div>
+            <input type="text" name="name" id="name" maxlength="50" value="{{ form.name }}" required>
+        </div>
+
+        <div>
+            <label for="email">Email</label>
+        </div>
+        <div>
+            <input type="email" name="email" id="email" value="{{ form.email }}" required>
+        </div>
+
+        <div>
+            <label for="phone">Phone Number</label>
+        </div>
+        <div>
+            <input type="tel" name="phone" id="phone" pattern="[0-9]{10}" maxlength="10" value="{{ form.phone }}" required>
+        </div>
+
+        <div>
+            <label>Gender</label>
+        </div>
+        <div>
+            {% for value, label in genders %}
+            <input type="radio" name="gender" id="gender_{{ value }}" value="{{ value }}"
+                {% if form.gender == value %}checked{% endif %} required>
+            <label for="gender_{{ value }}">{{ label }}</label>
+            {% endfor %}
+        </div>
+
+        <div>
+            <label for="dob">Date of Birth</label>
+        </div>
+        <div>
+            <input type="date" name="dob" id="dob" value="{{ form.dob }}" required>
+        </div>
+
+        <div>
+            <label for="course">Course</label>
+        </div>
+        <div>
+            <select name="course" id="course" required>
+                <option value="">-- select course --</option>
+                {% for value, label in courses %}
+                <option value="{{ value }}" {% if form.course == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="address">Address</label>
+        </div>
+        <div>
+            <textarea name="address" id="address" rows="3" cols="30" required>{{ form.address }}</textarea>
+        </div>
+
+        <br>
+        <div>
+            <input type="submit" value="Register">
+        </div>
+
+    </form>
+
+    <br>
+    <a href="{% url 'home' %}">view registered students</a>
+
+</body>
+</html>

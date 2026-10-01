@@ -1,0 +1,47 @@
+{% extends "quiz/base.html" %}
+
+{% block title %}{{ quiz.title }} | QuizMaster{% endblock %}
+
+{% block content %}
+<div class="quiz-page">
+    <div class="quiz-top">
+        <div>
+            <span class="badge">QUIZ IN PROGRESS</span>
+            <h1>{{ quiz.title }}</h1>
+            <p>{{ quiz.description }}</p>
+        </div>
+        <div class="question-count">{{ questions|length }} Questions</div>
+    </div>
+
+    <form method="post" action="{% url 'submit_quiz' quiz.id %}">
+        {% csrf_token %}
+
+        {% for question in questions %}
+        <div class="question-card">
+            <div class="question-number">QUESTION {{ forloop.counter }}</div>
+            <h2>{{ question.question_text }}</h2>
+
+            <div class="options">
+                {% for option in question.options.all %}
+                <label class="option-label">
+                    <input type="radio" name="question_{{ question.id }}" value="{{ option.id }}">
+                    <span class="option-letter">
+                        {% cycle "A" "B" "C" "D" %}
+                    </span>
+                    <span>{{ option.option_text }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-card">
+            <h3>This quiz has no questions yet.</h3>
+        </div>
+        {% endfor %}
+
+        {% if questions %}
+        <button type="submit" class="submit-quiz">Submit Quiz & Generate Report →</button>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

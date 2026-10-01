@@ -1,0 +1,29 @@
+{% extends 'master.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<h2 style="text-align:center; margin-bottom:20px;">
+    Laptop Collection
+</h2>
+
+
+<div class="image-container">
+
+    <img src="{% static 'laptop1.jpg' %}" alt="Laptop 1">
+
+    <img src="{% static 'laptop2.jpg' %}" alt="Laptop 2">
+
+    <img src="{% static 'laptop3.jpg' %}" alt="Laptop 3">
+
+    <img src="{% static 'laptop4.jpg' %}" alt="Laptop 4">
+
+    <img src="{% static 'laptop5.jpg' %}" alt="Laptop 5">
+
+    <img src="{% static 'laptop6.jpg' %}" alt="Laptop 6">
+
+</div>
+
+{% endblock %}

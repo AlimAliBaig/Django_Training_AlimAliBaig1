@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 40px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 800px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+        }
+        th {
+            background-color: #667eea;
+            color: white;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        tr {
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+        tr:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.01);
+        }
+        td a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        td a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee List</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Employee No.</th>
+                <th>Employee Name</th>
+                <th>Employee Salary</th>
+            </tr>
+            {% for i in Employees %}
+            <tr>
+                <td><a href="http://localhost:8000/database/updateEmployeeform/?id={{i.id}}">{{i.id}}</a></td>
+                <td>{{i.eno}}</td>
+                <td>{{i.ename}}</td>
+                <td>{{i.esal}}</td>
+                <td><a href="http://localhost:8000/database/deleteEmployee/?id={{i.id}}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

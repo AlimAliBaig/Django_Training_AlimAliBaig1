@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operations</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #d9e8f5, #c6d9e8);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background decorative circles */
+        body::before,
+        body::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.35);
+        }
+
+        body::before {
+            width: 280px;
+            height: 280px;
+            top: -100px;
+            left: -80px;
+        }
+
+        body::after {
+            width: 350px;
+            height: 350px;
+            bottom: -150px;
+            right: -100px;
+        }
+
+        .container {
+            width: 560px;
+            padding: 45px;
+            background-color: rgba(255, 255, 255, 0.96);
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(37, 61, 80, 0.18);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 18px;
+            background-color: #e5f0f8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        h1 {
+            margin: 0;
+            color: #263b4d;
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #71808c;
+            font-size: 15px;
+            margin: 10px 0 30px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 16px 20px;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn span {
+            display: block;
+            font-size: 12px;
+            font-weight: normal;
+            margin-top: 5px;
+            opacity: 0.85;
+        }
+
+        .create {
+            background-color: #31966b;
+        }
+
+        .read {
+            background-color: #367fb5;
+        }
+
+        .update {
+            background-color: #d49a2a;
+        }
+
+        .delete {
+            background-color: #c95656;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 9px 18px rgba(0, 0, 0, 0.16);
+        }
+
+        .create:hover {
+            background-color: #277b57;
+        }
+
+        .read:hover {
+            background-color: #28678f;
+        }
+
+        .update:hover {
+            background-color: #b9821e;
+        }
+
+        .delete:hover {
+            background-color: #aa3f3f;
+        }
+
+        .footer {
+            margin-top: 28px;
+            font-size: 13px;
+            color: #8a969e;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 35px 25px;
+            }
+
+            .buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="icon">
+            ⚙
+        </div>
+
+        <h1>CRUD Operations</h1>
+
+        <!-- <p class="subtitle">
+            Manage your products using simple CRUD operations
+        </p> -->
+        <br><br><br>
+
+        <div class="buttons">
+
+            <a href="{% url 'createproduct' %}" class="btn create">
+                Create
+                <span>Add a new product</span>
+            </a>
+
+            <a href="{% url 'productlist' %}" class="btn read">
+                Read
+                <span>View all products</span>
+            </a>
+
+            <a href="{% url 'updateProduct' %}" class="btn update">
+                Update
+                <span>Modify a product</span>
+            </a>
+
+            <a href="{% url 'deleteProduct' %}" class="btn delete">
+                Delete
+                <span>Remove a product</span>
+            </a>
+
+        </div>
+
+        <div class="footer">
+            Product Management System
+        </div>
+
+    </div>
+
+</body>
+</html>
